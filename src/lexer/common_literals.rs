@@ -1,11 +1,11 @@
 // Contains the common literals used in the common DSL
-const SEPARATOR_VALUE: &str = "---";
-const RIGHT_BRACE_VALUE: &str = "}";
-const LEFT_BRACE_VALUE: &str = "{";
-const PORTS_PREFIX: &str = "ports {";
-const PORTS_TOKEN_VALUE: &str = "ports";
-const PORT_PREFIX: &str = "port:";
-const TARGET_PORT_PREFIX: &str = "targetPort:";
+pub const SEPARATOR_VALUE: &str = "---";
+pub const RIGHT_BRACE_VALUE: &str = "}";
+pub const LEFT_BRACE_VALUE: &str = "{";
+pub const PORTS_PREFIX: &str = "ports {";
+pub const PORTS_TOKEN_VALUE: &str = "ports";
+pub const PORT_PREFIX: &str = "port:";
+pub const TARGET_PORT_PREFIX: &str = "targetPort:";
 
 // Unit tests
 #[cfg(test)]

@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use crate::nodes::node::Node;
+use std::collections::HashMap;
 
 // Define the ResourceSpec struct
 pub struct ResourceSpec {
@@ -68,7 +68,10 @@ mod tests {
             replicas: 3,
             image: "my-image".to_string(),
             args: vec!["arg1".to_string(), "arg2".to_string()],
-            env: [("ENV_VAR".to_string(), "value".to_string())].iter().cloned().collect(),
+            env: [("ENV_VAR".to_string(), "value".to_string())]
+                .iter()
+                .cloned()
+                .collect(),
             ports: [("http".to_string(), 80)].iter().cloned().collect(),
             resources: Some(resource_requirements),
             storage: Some(storage_config),
@@ -78,7 +81,10 @@ mod tests {
         assert_eq!(deployment_node.namespace, "default");
         assert_eq!(deployment_node.replicas, 3);
         assert_eq!(deployment_node.image, "my-image");
-        assert_eq!(deployment_node.args, vec!["arg1".to_string(), "arg2".to_string()]);
+        assert_eq!(
+            deployment_node.args,
+            vec!["arg1".to_string(), "arg2".to_string()]
+        );
         assert_eq!(deployment_node.env.get("ENV_VAR").unwrap(), "value");
         assert_eq!(deployment_node.ports.get("http").unwrap(), &80);
         assert!(deployment_node.resources.is_some());
@@ -102,4 +108,3 @@ mod tests {
         assert_eq!(deployment_node.node_type(), "Deployment");
     }
 }
-

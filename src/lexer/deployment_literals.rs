@@ -1,22 +1,22 @@
 // Contains the literals used in the deployment DSL
-const DEPLOY_APP_PREFIX: &str = "deploy app";
-const NAMESPACE_PREFIX: &str = "namespace:";
-const REPLICAS_PREFIX: &str = "replicas:";
-const IMAGE_PREFIX: &str = "image:";
-const ENV_PREFIX: &str = "env {";
-const ENV_TOKEN_VALUE: &str = "env";
-const RESOURCES_PREFIX: &str = "resources {";
-const RESOURCES_TOKEN_VALUE: &str = "resources";
-const LIMITS_PREFIX: &str = "limits {";
-const LIMITS_TOKEN_VALUE: &str = "limits";
-const REQUESTS_PREFIX: &str = "requests {";
-const REQUESTS_TOKEN_VALUE: &str = "requests";
-const MEMORY_PREFIX: &str = "memory:";
-const CPU_PREFIX: &str = "cpu:";
-const STORAGE_PREFIX: &str = "storage {";
-const STORAGE_TOKEN_VALUE: &str = "storage";
-const VOLUME_PREFIX: &str = "volume:";
-const SIZE_PREFIX: &str = "size:";
+pub const DEPLOY_APP_PREFIX: &str = "deploy app";
+pub const NAMESPACE_PREFIX: &str = "namespace:";
+pub const REPLICAS_PREFIX: &str = "replicas:";
+pub const IMAGE_PREFIX: &str = "image:";
+pub const ENV_PREFIX: &str = "env {";
+pub const ENV_TOKEN_VALUE: &str = "env";
+pub const RESOURCES_PREFIX: &str = "resources {";
+pub const RESOURCES_TOKEN_VALUE: &str = "resources";
+pub const LIMITS_PREFIX: &str = "limits {";
+pub const LIMITS_TOKEN_VALUE: &str = "limits";
+pub const REQUESTS_PREFIX: &str = "requests {";
+pub const REQUESTS_TOKEN_VALUE: &str = "requests";
+pub const MEMORY_PREFIX: &str = "memory:";
+pub const CPU_PREFIX: &str = "cpu:";
+pub const STORAGE_PREFIX: &str = "storage {";
+pub const STORAGE_TOKEN_VALUE: &str = "storage";
+pub const VOLUME_PREFIX: &str = "volume:";
+pub const SIZE_PREFIX: &str = "size:";
 
 #[cfg(test)]
 mod tests {

@@ -6,7 +6,10 @@ fn main() {
         name: "my-service".to_string(),
         namespace: "default".to_string(),
         ports: [(80, 8080)].iter().cloned().collect(),
-        labels: [("app".to_string(), "my-app".to_string())].iter().cloned().collect(),
+        labels: [("app".to_string(), "my-app".to_string())]
+            .iter()
+            .cloned()
+            .collect(),
     };
 
     println!("Node type: {}", service_node.node_type());

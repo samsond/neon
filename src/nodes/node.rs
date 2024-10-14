@@ -23,4 +23,3 @@ mod tests {
         assert_eq!(node.node_type(), "Example");
     }
 }
-

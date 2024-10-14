@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use crate::nodes::node::Node;
+use std::collections::HashMap;
 
 // Define the ServiceNode struct
 pub struct ServiceNode {

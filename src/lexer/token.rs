@@ -1,6 +1,6 @@
 // TokenType represents the different types of tokens in the DSL.
-#[derive(Debug, PartialEq)]
-enum TokenType {
+#[derive(Debug, PartialEq, Clone)]
+pub enum TokenType {
     TokenEOF,
     TokenDeployApp,
     TokenNamespace,
@@ -29,8 +29,6 @@ enum TokenType {
     TokenTypeString,
     TokenSeparator, // ---
 }
-
-
 
 // Unit tests
 #[cfg(test)]
