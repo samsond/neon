@@ -20,7 +20,7 @@ mod tests {
     #[test]
     fn test_node_type() {
         let node = TestNode;
-        assert_eq!(node.node_type(), "Exampl");
+        assert_eq!(node.node_type(), "Example");
     }
 }
 
