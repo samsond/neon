@@ -9,4 +9,5 @@ pub mod nodes {
 pub mod lexer {
     mod token;
     mod common_literals;
+    mod deployment_literals;
 }
