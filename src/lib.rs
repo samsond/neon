@@ -6,7 +6,7 @@ pub mod nodes {
 }
 
 // Declare the lexer module
-mod lexer {
+pub mod lexer {
     mod common_literals;
     mod deployment_literals;
     pub mod lexer;

@@ -17,6 +17,7 @@ pub struct Token {
 }
 
 // Lexer struct represents a lexer for the DSL.
+#[derive(Debug)]
 pub struct Lexer<'a> {
     lines: Lines<'a>,
     tokens: Vec<Token>, // Store tokens for debugging
