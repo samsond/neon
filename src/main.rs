@@ -1,16 +1,14 @@
-use neon::nodes::node::Node; // Import the Node trait
-use neon::nodes::service_node::ServiceNode;
+use clap::Command;
+use neon::cmd::generate;
 
 fn main() {
-    let service_node = ServiceNode {
-        name: "my-service".to_string(),
-        namespace: "default".to_string(),
-        ports: [(80, 8080)].iter().cloned().collect(),
-        labels: [("app".to_string(), "my-app".to_string())]
-            .iter()
-            .cloned()
-            .collect(),
-    };
+    let matches = Command::new("kptn")
+        .about("kptn is a CLI for managing Kubernetes resources using the Krypton DSL")
+        .subcommand(generate::new_generate_command())
+        .get_matches();
 
-    println!("Node type: {}", service_node.node_type());
+    match matches.subcommand() {
+        Some(("generate", sub_m)) => generate::execute_generate_command(sub_m),
+        _ => eprintln!("Unknown command"),
+    }
 }

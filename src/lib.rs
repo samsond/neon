@@ -12,3 +12,7 @@ mod lexer {
     pub mod lexer;
     mod token;
 }
+
+pub mod cmd {
+    pub mod generate;
+}

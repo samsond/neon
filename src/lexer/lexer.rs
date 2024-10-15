@@ -61,7 +61,11 @@ impl<'a> Lexer<'a> {
                 line_number: self.line_number,
             },
             _ if text.starts_with(DEPLOY_APP_PREFIX) => {
-                let value = text.trim_start_matches(DEPLOY_APP_PREFIX).trim_end_matches(LEFT_BRACE_VALUE).trim().to_string();
+                let value = text
+                    .trim_start_matches(DEPLOY_APP_PREFIX)
+                    .trim_end_matches(LEFT_BRACE_VALUE)
+                    .trim()
+                    .to_string();
                 Token {
                     token_type: TokenType::TokenDeployApp,
                     value,
@@ -201,25 +205,177 @@ mod tests {
         };
 
         let test_cases = vec![
-            ("Separator", "---", Token { token_type: TokenType::TokenSeparator, value: SEPARATOR_VALUE.to_string(), line_number: 1 }),
-            ("DeployApp", "deploy app myapp {", Token { token_type: TokenType::TokenDeployApp, value: "myapp".to_string(), line_number: 1 }),
-            ("Namespace", "namespace: mynamespace", Token { token_type: TokenType::TokenNamespace, value: "mynamespace".to_string(), line_number: 1 }),
-            ("Replicas", "replicas: 3", Token { token_type: TokenType::TokenReplicas, value: "3".to_string(), line_number: 1 }),
-            ("Image", "image: myimage", Token { token_type: TokenType::TokenImage, value: "myimage".to_string(), line_number: 1 }),
-            ("Env", "env {", Token { token_type: TokenType::TokenEnv, value: ENV_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Ports", "ports {", Token { token_type: TokenType::TokenPorts, value: PORTS_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Resources", "resources {", Token { token_type: TokenType::TokenResources, value: RESOURCES_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Limits", "limits {", Token { token_type: TokenType::TokenLimits, value: LIMITS_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Requests", "requests {", Token { token_type: TokenType::TokenRequests, value: REQUESTS_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Memory", "memory: 512Mi", Token { token_type: TokenType::TokenMemory, value: "512Mi".to_string(), line_number: 1 }),
-            ("CPU", "cpu: 1", Token { token_type: TokenType::TokenCPU, value: "1".to_string(), line_number: 1 }),
-            ("Storage", "storage {", Token { token_type: TokenType::TokenStorage, value: STORAGE_TOKEN_VALUE.to_string(), line_number: 1 }),
-            ("Volume", "volume: myvolume", Token { token_type: TokenType::TokenVolume, value: "myvolume".to_string(), line_number: 1 }),
-            ("Size", "size: 10Gi", Token { token_type: TokenType::TokenSize, value: "10Gi".to_string(), line_number: 1 }),
-            ("RightBrace", "}", Token { token_type: TokenType::TokenRBrace, value: RIGHT_BRACE_VALUE.to_string(), line_number: 1 }),
-            ("Port", "port: 8080", Token { token_type: TokenType::TokenPort, value: "8080".to_string(), line_number: 1 }),
-            ("TargetPort", "targetPort: 80", Token { token_type: TokenType::TokenTargetPort, value: "80".to_string(), line_number: 1 }),
-            ("Identifier", "someIdentifier", Token { token_type: TokenType::TokenIdentifier, value: "someIdentifier".to_string(), line_number: 1 }),
+            (
+                "Separator",
+                "---",
+                Token {
+                    token_type: TokenType::TokenSeparator,
+                    value: SEPARATOR_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "DeployApp",
+                "deploy app myapp {",
+                Token {
+                    token_type: TokenType::TokenDeployApp,
+                    value: "myapp".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Namespace",
+                "namespace: mynamespace",
+                Token {
+                    token_type: TokenType::TokenNamespace,
+                    value: "mynamespace".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Replicas",
+                "replicas: 3",
+                Token {
+                    token_type: TokenType::TokenReplicas,
+                    value: "3".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Image",
+                "image: myimage",
+                Token {
+                    token_type: TokenType::TokenImage,
+                    value: "myimage".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Env",
+                "env {",
+                Token {
+                    token_type: TokenType::TokenEnv,
+                    value: ENV_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Ports",
+                "ports {",
+                Token {
+                    token_type: TokenType::TokenPorts,
+                    value: PORTS_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Resources",
+                "resources {",
+                Token {
+                    token_type: TokenType::TokenResources,
+                    value: RESOURCES_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Limits",
+                "limits {",
+                Token {
+                    token_type: TokenType::TokenLimits,
+                    value: LIMITS_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Requests",
+                "requests {",
+                Token {
+                    token_type: TokenType::TokenRequests,
+                    value: REQUESTS_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Memory",
+                "memory: 512Mi",
+                Token {
+                    token_type: TokenType::TokenMemory,
+                    value: "512Mi".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "CPU",
+                "cpu: 1",
+                Token {
+                    token_type: TokenType::TokenCPU,
+                    value: "1".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Storage",
+                "storage {",
+                Token {
+                    token_type: TokenType::TokenStorage,
+                    value: STORAGE_TOKEN_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Volume",
+                "volume: myvolume",
+                Token {
+                    token_type: TokenType::TokenVolume,
+                    value: "myvolume".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Size",
+                "size: 10Gi",
+                Token {
+                    token_type: TokenType::TokenSize,
+                    value: "10Gi".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "RightBrace",
+                "}",
+                Token {
+                    token_type: TokenType::TokenRBrace,
+                    value: RIGHT_BRACE_VALUE.to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Port",
+                "port: 8080",
+                Token {
+                    token_type: TokenType::TokenPort,
+                    value: "8080".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "TargetPort",
+                "targetPort: 80",
+                Token {
+                    token_type: TokenType::TokenTargetPort,
+                    value: "80".to_string(),
+                    line_number: 1,
+                },
+            ),
+            (
+                "Identifier",
+                "someIdentifier",
+                Token {
+                    token_type: TokenType::TokenIdentifier,
+                    value: "someIdentifier".to_string(),
+                    line_number: 1,
+                },
+            ),
         ];
 
         for (name, input, expected_token) in test_cases {
